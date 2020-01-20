@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <form action="/index" method="post">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Symbol</th><th>Name</th><th>Shares</th><th>Price</th><th>Total</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="4">{{grandtotal | usd}}</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for dict in mylist %}
+                    <tr>
+                        <td>{{dict["symbol"]}}</td><td>{{dict["stockname"]}}</td><td>{{dict["numofshares"]}}</td><td>{{dict["currentprice"] | usd}}</td><td>{{dict["total"] | usd}}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4">CASH</td>
+                    <td>{{cash | usd}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+{% endblock %}
